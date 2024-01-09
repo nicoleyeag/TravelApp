@@ -1,4 +1,4 @@
-from datetime import datetime
+from DateTime import DateTime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -9,8 +9,8 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
 
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
@@ -25,8 +25,8 @@ class Trip(db.Model):
     user_id = db.Column(db.String, db.ForeignKey("users.user_id"))
     title = db.Column(db.String)
     description = db.Column(db.String)
-    start_date = db.Column(db.Datetime)
-    end_date = db.Column(db.Datetime)
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
     budget = db.Column(db.Integer)
 
     def __repr__(self):
@@ -41,9 +41,9 @@ class Excursion(db.Model):
     excursion_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     trip_id = db.Column(db.String, db.ForeignKey("trips.trip_id"))
     price = db.Column(db.Integer)
-    start_time = db.Column(db.Datetime)
-    end_time = db.Column(db.Datetime)
-    title = db.Column(db.String)
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
+    title = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     lattitude = db.Column(db.Integer)
     longitude = db.Column(db.Integer)
@@ -62,10 +62,10 @@ class Photo(db.Model):
     photo_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.String, db.ForeignKey("user.user_id"))
     trip_id = db.Column(db.String, db.ForeignKey("trips.trip_id"))
-    title = db.Column(db.String)
+    title = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     comment = db.Column(db.String)
-    timestamp = db.Column(db.Datetime)
+    timestamp = db.Column(db.DateTime)
     location = db.Column(db.String)
     photo_url = db.Column(db.String)
 
@@ -106,14 +106,49 @@ class Wish(db.Model):
     # ___________________________________________________________________________
 
 class Transportation(db.Model):
+    """transportaion table"""
 
     __tablename__ = "transportations"
 
     transportaion_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     trip_id = db.Column(db.String, db.ForeignKey("trips.trip_id"))
-    start_id = 
-    end_id = 
-    start_type = 
-    end_type = 
-    types = 
-    notes = 
+    start_id = db.Column(db.Integer)
+    end_id = db.Column(db.Integer)
+    start_type = db.Column(db.String)
+    end_type = db.Column(db.String)
+    types = db.Column(db.Integer) #might need to change this
+    notes = db.Column(db.String)
+
+    def __repr__(self):
+        return f"<Transpo transportaion_id={self.transportaion_id}>"
+    
+class Hotel(db.Model):
+    """hotels"""
+
+    __tablename__ = "hotels"
+
+    hotel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    trip_id = db.Column(db.String, db.ForeignKey("trips.trip_id"))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime)
+    street_address = db.Column(db.String)
+    hotel_url = db.Column(db.String)
+    lattitude = db.Column(db.Integer)
+    longitude = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"<Hotel hotel_id={self.hotel_id}>"
+    
+
+class Flight(db.Model):
+    """flights"""
+
+    __tablename__ = "flights"
+
+    flight_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    trip_id = db.Column(db.String, db.ForeignKey("trips.trip_id"))
+    flight_url = db.Column(db.String)
+  
+
+    def __repr__(self):
+        return f"<Flgiht flight_id={self.flight_id}>"
