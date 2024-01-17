@@ -12,12 +12,16 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
 
     trip = db.relationship("Trip", back_populates="user")
     photo = db.relationship("Photo", back_populates="user")
     wishlist = db.relationship("Wishlist", back_populates="user")
+
+
+    
 
     def __repr__(self):
         return f"<User🤸‍♀️ user_id={self.user_id} email={self.email}>"
