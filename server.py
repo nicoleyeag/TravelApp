@@ -19,7 +19,6 @@ def homepage():
 @app.route('/login', methods = ['GET'])
 def sign_inn():
     
-
     return render_template('sign-up.html')
 
 
@@ -31,16 +30,27 @@ def login():
     password = request.form.get("password")
     
 
+
     # Sign up or sign in based on the provided data
     user = crud.sign_up_user(email, password) or crud.sign_in_user(email, password)
 
     if user:
+        # --if user, log them in 
+            # --if created a new account return new homepage
+        # --else no user then flash message
+            # -- if user wants to create account run sign_up_user
+            # -- or try to login again
+        
         # Successful sign-up or sign-in, render the homepage
+        #user specific homepage will render 
         return render_template('homepage.html')
     # else:
     #     # Handle the case when the operation fails (user exists, incorrect credentials, etc.)
     #     return jsonify({'error': 'Authentication failed'}), 401
 
+    # what if user puts in wrong email?
+    # flash a message "account doesnt exist do you want to create an account"
+    # this flash message should be in the server
 
 
 

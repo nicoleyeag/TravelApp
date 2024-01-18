@@ -25,6 +25,7 @@ def sign_up_user(email, password):
         db.session.commit()
 
         return new_user
+    
 
 
 def sign_in_user(email, password):
@@ -38,6 +39,9 @@ def sign_in_user(email, password):
 
     if user:
         #add another check for pw?
+        # need to make sure pw 
+        # we are checking from the db
+        #if user.password == pw in form
         if pw:
             return user
         else:
