@@ -1,0 +1,18 @@
+<!-- user-homepage.html -->
+
+{% extends 'base.html' %}
+{% block title %}User Homepage{% endblock %}
+
+{% block body %}
+
+<!-- Your existing content goes here -->
+
+<script>
+  // Check if the user_name variable is defined
+  if (typeof user_name !== 'undefined') {
+    // Display an alert with a personalized greeting
+    alert('Hello, ' + user_name + '!');
+  }
+</script>
+
+{% endblock %}

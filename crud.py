@@ -1,29 +1,26 @@
-from model import db, User, Trip, Excursion,Photo, Wishlist, Wish, connect_to_db
-from flask import request
+from model import db, User, Trip, Excursion, Photo, Wishlist, Wish, connect_to_db
+from flask import request, flash
 import logging
+from flask_bcrypt import Bcrypt 
+import bcrypt
 
-def sign_up_user(email, password):
-    """add a new user to the db"""
+def sign_up_user(email, password, screenname):
+    """Add a new user to the db"""
 
-    # the user will fill out the form on sign-in html
-    # use POST request to gather the form info and send it to the database
-    # email = request.form.get("email")
-    # password = request.form.get("password")
-
-    # Check if the user already exists
     existing_user = User.query.filter_by(email=email).first()
 
     if existing_user:
-        # User already exists return none so route can sign in not sign up
         return None
     else:
-        # Hash the password before storing it
-        # hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        
-        new_user = User(email=email, password=password)
+        # Generate a salt
+        salt = bcrypt.gensalt()
+
+        # Hash the password with flask bcrypt
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
+        new_user = User(email=email, password=hashed_password, screen_name=screenname)
         db.session.add(new_user)
         db.session.commit()
-
+        flash("New user added!")
         return new_user
     
 
@@ -31,26 +28,27 @@ def sign_up_user(email, password):
 def sign_in_user(email, password):
     """check db for user then sign them in"""
 
-    # email = request.form.get("email")
-    # password = request.form.get("password")
+    # Query the database for the user with the provided email
+    search_email = email
 
-    user = User.query.filter_by(email=email).first()
-    pw = User.query.filter_by(password=password).first()
-
+    user = User.query.filter_by(email=search_email).first()
+    print("checking db for user")
     if user:
-        #add another check for pw?
-        # need to make sure pw 
-        # we are checking from the db
-        #if user.password == pw in form
-        if pw:
+        # Verify the password using bcrypt
+        print("checking pw")
+
+        password = password.encode('utf-8')
+
+        if bcrypt.checkpw(password, user.password.encode('utf-8')):
+            print("pw looks good")
             return user
         else:
-            alert("Incorrect password. Please try again.")
-
-
+            flash("Incorrect password. Please try again.", 'error')
     else:
-        # Incorrect credentials or user not found
-        return None
+        print("uh oh")
+        flash("User not found. Please sign up.", 'error')
+
+    return None
     
 
 
