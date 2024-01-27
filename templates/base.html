@@ -36,6 +36,14 @@
 </head>
 
 <body>
+  <!-- remove this if once user session -->
+  {# For demo purposes, show our sessions #}
+    {% if session %}
+    
+        <label>Flask Session</label>
+        {{ session }}
+      
+    {% endif %}
 
   <!-- start custom navbar -->
   <div id="topnav" ></div>

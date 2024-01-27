@@ -37,7 +37,38 @@ def get_photos(location_id):
         raise  # Re-raise the exception to be handled by the calling function
   
 
+def get_location_details(location_id):
+    """Retrieve location details based on location id."""
+    try:
+        details_url = f'https://api.content.tripadvisor.com/api/v1/location/{location_id}/details'
+        params = {'key': API_KEY}
+        headers = {"accept": "application/json"}
 
+        res_details = requests.get(details_url, params=params, headers=headers)
+        res_details.raise_for_status()  # Raise an HTTPError for bad responses
+        details_data = res_details.json()
+
+        # Ensure that 'description' is present in details_data
+        if 'description' in details_data:
+            description = details_data['description']
+            limited_description = description[:120] + ("..." if len(description) > 120 else "")
+            print(limited_description)
+            return limited_description
+        else:
+            print("Description not found in location details. Returning default description.")
+            return "no description"
+
+    except requests.exceptions.HTTPError as errh:
+        if errh.response.status_code == 404:
+            print("Location not found. Returning custom description.")
+        else:
+            print(f"HTTP Error in get_location_details: {errh}")
+            print(f"Response content: {res_details.content}")  # Log the response content
+            raise  # Re-raise the exception for other HTTP errors
+
+    except Exception as e:
+        print(f"An error occurred in get_location_details: {str(e)}")
+        raise  # Re-raise the exception to be handled by the calling function
 
 def get_locations():
     """retrieve location id based on user location search"""
@@ -81,4 +112,5 @@ def get_locations():
         error_data = {'error_message': error_message}
         print(e)
         return jsonify(error_data), 500  # Return a 500 Internal Server Error
+
 

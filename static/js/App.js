@@ -36,3 +36,6 @@ if (currentPage === '/sign-up') {
 if (currentPage === '/sign-in') {
   ReactDOM.render( /*#__PURE__*/React.createElement(SignInForm, null), document.getElementById('signInForm'));
 }
+if (currentPage === '/profile') {
+  ReactDOM.render( /*#__PURE__*/React.createElement(UserProfile, null), document.getElementById('userProfile'));
+}

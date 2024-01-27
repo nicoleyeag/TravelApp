@@ -7,7 +7,8 @@ function Card({
 }) {
   const {
     name,
-    photo_list
+    photo_list,
+    description
   } = locationData;
   return /*#__PURE__*/React.createElement(ReactBootstrap.Card, {
     style: {
@@ -23,7 +24,7 @@ function Card({
       height: '150px',
       objectFit: 'cover'
     }
-  }), /*#__PURE__*/React.createElement(ReactBootstrap.Card.Body, null, /*#__PURE__*/React.createElement(ReactBootstrap.Card.Title, null, name), /*#__PURE__*/React.createElement(ReactBootstrap.Card.Text, null, "Some quick example text to build on the card title and make up the bulk of the card's content."), /*#__PURE__*/React.createElement("coreButton", {
+  }), /*#__PURE__*/React.createElement(ReactBootstrap.Card.Body, null, /*#__PURE__*/React.createElement(ReactBootstrap.Card.Title, null, name), /*#__PURE__*/React.createElement(ReactBootstrap.Card.Text, null, description), /*#__PURE__*/React.createElement("coreButton", {
     className: "coreButton",
     type: "submit"
   }, "Explore")));

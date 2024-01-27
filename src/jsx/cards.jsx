@@ -5,7 +5,7 @@ import Buttons from '/static/jsx/coreButton.js';
 
 
 function Card({ locationData }) {
-  const { name, photo_list } = locationData;
+  const { name, photo_list, description } = locationData;
   return (
     <ReactBootstrap.Card style={{ width: '18rem', height: '350px'  }}>
       <ReactBootstrap.Card.Img
@@ -16,9 +16,7 @@ function Card({ locationData }) {
       />
       <ReactBootstrap.Card.Body>
         <ReactBootstrap.Card.Title>{name}</ReactBootstrap.Card.Title>
-        <ReactBootstrap.Card.Text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </ReactBootstrap.Card.Text>
+        <ReactBootstrap.Card.Text>{description}</ReactBootstrap.Card.Text>
         <coreButton className="coreButton" type="submit">Explore</coreButton>
       </ReactBootstrap.Card.Body>
     </ReactBootstrap.Card>

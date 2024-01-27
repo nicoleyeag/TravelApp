@@ -10,7 +10,7 @@ from pprint import pformat
 import os
 import requests
 import secrets
-from api_query import get_photos, get_locations
+from api_query import get_photos, get_location_details
 
 from flask_bcrypt import Bcrypt 
 
@@ -117,7 +117,7 @@ def user_homepage():
 def get_user_profile():
     # Check if the user is logged in
     if 'user_id' not in session:
-        return jsonify({'error': 'User not logged in'}), 401
+        return jsonify({'error': 'User not logged in'}, status=401)
 
     user_id = session['user_id']
     user = User.query.get(user_id)
@@ -132,13 +132,13 @@ def get_user_profile():
         }
         return jsonify(user_data)
     else:
-        return jsonify({'error': 'User not found'}), 404
+        return jsonify({'error': 'User not found'}, status=404)
 
 
-# @app.route('/profile')
-# def profile():
-#     """only show if the user is signed in"""
-#     return render_template('profile.html')
+@app.route('/profile')
+def profile():
+    """only show if the user is signed in"""
+    return render_template('profile.html')
 
 
 
@@ -171,16 +171,18 @@ def search_excursions():
         search_results = search_data.get('data', [])
         data_list = [{'location_id': item.get('location_id'), 'name': item.get('name')} for item in search_results]
 
-        # Fetch photos for each location
+        # Fetch photo and description for each location
         locations_with_photos = []
         for location in data_list:
             location_id = location['location_id']
             photo_list = get_photos(location_id)
+            description = get_location_details(location_id)
 
             location_with_photos = {
                 'location_id': location_id,
                 'name': location['name'],
                 'photo_list': photo_list,
+                'description': description,
             }
 
             locations_with_photos.append(location_with_photos)

@@ -19,6 +19,9 @@ import SignInForm from '/static/jsx/signIn.js';
 const currentPage = window.location.pathname;
 
 // NAVBAR
+// add the use state here
+// if user logged in load "user" nav bar
+// else load normal bar
 ReactDOM.render(<Topnav />, document.getElementById('topnav'));
 
 
@@ -40,4 +43,8 @@ if (currentPage === '/sign-up') {
 
 if (currentPage === '/sign-in') {
     ReactDOM.render(<SignInForm />, document.getElementById('signInForm'));
+}
+
+if (currentPage === '/profile') {
+    ReactDOM.render(<UserProfile />, document.getElementById('userProfile'));
 }
