@@ -12,19 +12,15 @@ function SearchBy() {
     const url = `/excursions/search?searchQuery=${encodeURIComponent(searchQuery)}`;
 
     // Navigate to the constructed URL
+    // do a fetch here to get json data
+    // will use this data to also do for loop for my cards
+    // use effee
+
     window.location.href = url;
   };
-  return (
-    /*#__PURE__*/
-    // change search params to own jsx file
-    // add that function here
-    // cards is its own jsx file
-    // also add that function here
-    // add anything else you want to render under that ^ function
-    React.createElement("div", null, /*#__PURE__*/React.createElement(SearchParams, {
-      handleSubmitParams: handleSubmitParams
-    }))
-  );
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SearchParams, {
+    handleSubmitParams: handleSubmitParams
+  }));
 }
 export default SearchBy;
 
