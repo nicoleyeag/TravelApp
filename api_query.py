@@ -1,3 +1,6 @@
+import os
+import requests
+import secrets
 
 API_KEY = os.environ['TRIPADVISOR_KEY']
 
@@ -19,6 +22,7 @@ def get_photos(location_id):
             photo_info = {
                 'thumbnail_url': images.get('thumbnail', {}).get('url', ''),
                 'small_url': images.get('small', {}).get('url', ''),
+                'med_url': images.get('medium', {}).get('url', ''),
             }
             photo_list.append(photo_info)
 
@@ -31,7 +35,7 @@ def get_photos(location_id):
     except Exception as e:
         print(f"An error occurred in get_photos: {str(e)}")
         raise  # Re-raise the exception to be handled by the calling function
-
+  
 
 
 

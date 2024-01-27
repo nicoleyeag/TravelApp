@@ -10,6 +10,7 @@ from pprint import pformat
 import os
 import requests
 import secrets
+from api_query import get_photos, get_locations
 
 from flask_bcrypt import Bcrypt 
 
@@ -155,34 +156,37 @@ def explore():
 API_KEY = os.environ['TRIPADVISOR_KEY']
 
 @app.route('/excursions/search', methods = ['GET'])
-def get_locations():
-    """retrieve location id based on user location search"""
 
+def search_excursions():
     try:
         search_query = request.args.get('searchQuery', '')
-        print(search_query)
-
         locations_url = 'https://api.content.tripadvisor.com/api/v1/location/search'
-
-        params = {
-            'key': API_KEY,  # Replace with a secure way of getting your API key
-            'searchQuery': search_query,
-        }
-
+        params = {'key': API_KEY, 'searchQuery': search_query}
         headers = {"accept": "application/json"}
-        res_search = requests.get(locations_url, params=params, headers=headers)
-        res_search.raise_for_status()  # Raise an HTTPError for bad responses
 
+        # Fetch locations
+        res_search = requests.get(locations_url, params=params, headers=headers)
+        res_search.raise_for_status()
         search_data = res_search.json()
-        # print(search_data)
         search_results = search_data.get('data', [])
-        print(search_results)
         data_list = [{'location_id': item.get('location_id'), 'name': item.get('name')} for item in search_results]
-        
-        # print(locationids)
+
+        # Fetch photos for each location
+        locations_with_photos = []
+        for location in data_list:
+            location_id = location['location_id']
+            photo_list = get_photos(location_id)
+
+            location_with_photos = {
+                'location_id': location_id,
+                'name': location['name'],
+                'photo_list': photo_list,
+            }
+
+            locations_with_photos.append(location_with_photos)
 
         # Prepare data for rendering in the template
-        data = {'data_list': data_list}
+        data = {'locations_with_photos': locations_with_photos}
         return jsonify(data)
 
     except requests.exceptions.HTTPError as errh:
@@ -199,36 +203,7 @@ def get_locations():
         return jsonify(error_data), 500  # Return a 500 Internal Server Error
 
 
-def get_photos(location_id):
-    """Retrieve photos based on location id."""
-    try:
-        photos_url = f'https://api.content.tripadvisor.com/api/v1/location/{location_id}/photos'
-        params = {'key': API_KEY}
-        headers = {"accept": "application/json"}
-        res_photos = requests.get(photos_url, params=params, headers=headers)
-        res_photos.raise_for_status()  # Raise an HTTPError for bad responses
-        photos_data = res_photos.json()
-        photos_results = photos_data.get('data', [])
 
-        # Extract relevant information from each photo
-        photo_list = []
-        for item in photos_results:
-            images = item.get('images', {})
-            photo_info = {
-                'thumbnail_url': images.get('thumbnail', {}).get('url', ''),
-                'small_url': images.get('small', {}).get('url', ''),
-            }
-            photo_list.append(photo_info)
-
-        return photo_list
-
-    except requests.exceptions.HTTPError as errh:
-        print(f"HTTP Error in get_photos: {errh}")
-        raise  # Re-raise the exception to be handled by the calling function
-
-    except Exception as e:
-        print(f"An error occurred in get_photos: {str(e)}")
-        raise  # Re-raise the exception to be handled by the calling function
 
 if __name__ == "__main__":    
     from model import connect_to_db

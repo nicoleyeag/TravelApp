@@ -1,24 +1,20 @@
-// // import Container from 'react-bootstrap/Container';
-// // import Row from 'react-bootstrap/Row';
-// // import Col from 'react-bootstrap/Col';
+// File: GridLayout.js
 
-// function AutoLayoutExample() {
-//   return (
-//     <ReactBootstrap.Container>
-//       <ReactBootstrap.Row>
-//         <ReactBootstrap.Col>1 of 2</Col>
-//         <ReactBootstrap.Col>2 of 2</Col>
-//       </ReactBootstrap.Row>
-//       <ReactBootstrap.Row>
-//         <ReactBootstrap.Col>1 of 3</Col>
-//         <ReactBootstrap.Col>2 of 3</Col>
-//         <ReactBootstrap.Col>3 of 3</Col>
-//       </ReactBootstrap.Row>
-//     </ReactBootstrap.Container>
-//   );
-// }
+// import React from 'react';
+// import * as ReactBootstrap from 'react-bootstrap';
 
-// export default AutoLayoutExample;
-
-// for for each location_id
-// create a card (reference cards.jsx or wherever they are)
+export function GridLayout({
+  children
+}) {
+  return /*#__PURE__*/React.createElement(ReactBootstrap.Container, null, children);
+}
+export function GridRow({
+  children
+}) {
+  return /*#__PURE__*/React.createElement(ReactBootstrap.Row, null, children);
+}
+export function GridCol({
+  children
+}) {
+  return /*#__PURE__*/React.createElement(ReactBootstrap.Col, null, children);
+}

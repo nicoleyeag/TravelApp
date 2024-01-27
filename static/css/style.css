@@ -157,4 +157,15 @@
     width:100%;
     margin-left: 40px;
     margin-right: 40px;
+    margin-bottom: 20px; 
+}
+
+/* SEARCH GRID */
+.container {
+    margin: 40px
+}
+
+/* CARD */
+.card {
+    margin: 10px
 }
