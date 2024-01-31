@@ -1,5 +1,5 @@
 from model import db, User, Trip, Excursion, Photo, Wishlist, Wish, connect_to_db
-from flask import request, flash
+from flask import request, flash, jsonify
 import logging
 from flask_bcrypt import Bcrypt 
 import bcrypt
@@ -50,6 +50,31 @@ def sign_in_user(email, password):
 
     return None
     
+
+
+def create_trip(user_id, title, description, start_date, end_date, budget):
+
+    # Check if a trip with the same title already exists
+    existing_trip = Trip.query.filter_by(title=title).first()
+
+    if existing_trip:
+        return jsonify({'success': False, 'error': 'Trip with the same title already exists'})
+
+    # Create a new Trip object
+    new_trip = Trip(
+        user_id=user_id,
+        title=title,
+        description=description,
+        start_date=start_date,
+        end_date=end_date,
+        budget=budget
+    )
+
+    # Add the new_trip to the database
+    db.session.add(new_trip)
+    db.session.commit()
+
+    flash("trip added!")
 
 
 ###any functions that has to do with your database

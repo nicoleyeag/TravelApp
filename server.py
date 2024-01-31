@@ -88,29 +88,33 @@ def sign_in_user():
 
 
 
-# @app.route('/homepage/user')
-# def homepage_user():
-#     """view homepage"""
+@app.route('/create_trip', methods=['POST'])
+def create_trip_route():
+    print("create trip route")
 
-#     # Check if the user is in the session
-#     if 'user_id' in session:
-#         user_id = session['user_id']
-#         user = User.query.get(user_id)
+    # Retrieve data from the request
+    user_id = session.get('user_id')  # You need to implement this function
+    data = request.json
+    title = data.get('title')
+    description = data.get('description')
+    start_date = data.get('start_date')
+    end_date = data.get('end_date')
+    budget = data.get('budget')
 
-#         if user:
-#             user_name = user.screen_name  # Replace with the actual property that stores the user's name
-#             return render_template('user-homepage.html', user_name=user_name)
+    # Create the trip
+    trip = crud.create_trip(user_id, title, description, start_date, end_date, budget)
 
-#     # If user not in session, redirect to sign-in page
-#     flash("Please sign in to access the homepage.", 'error')
-#     return redirect(url_for('sign_in_page'))
+    if trip:
+    # Trip created successfully
+        return jsonify({'success': True, 'message': 'Trip created successfully'})
+    else:
+    # Error in creating the trip
+        return jsonify({'success': False, 'error': trip.get('error')}), 400
 
 
-# @app.route('/homepage/user')
-# def user_homepage():
-#     """homepage once the user signs in"""
 
-#     return 'user homepage'
+
+
 
 
 @app.route('/check_login')
