@@ -4,11 +4,21 @@
 // import Nav from 'https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js';
 // import Navbar from 'https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js';
 
+
 import Buttons from '/static/jsx/coreButton.js';
+import isLoggedIn from '/static/jsx/auth.js';
 
 
 
 function Topnav() {
+  const [loggedIn, setLoggedIn] = React.useState(false); 
+
+  React.useEffect(() => {
+    fetch('/check_login')
+    .then(response => {
+
+      setLoggedIn(response.ok)
+  }), []});
 
   const handleSignUpClick = () => {
     // Use window.location.href to navigate to the desired URL
@@ -27,6 +37,19 @@ function Topnav() {
   const handleLogoClick = () => {
     window.location.href = '/homepage';
   };
+
+  const handleProfile = () => {
+    // Use window.location.href to navigate to the desired URL
+    window.location.href = '/profile';
+  };
+
+  const handleSignOutClick = () => {
+    // Use window.location.href to navigate to the desired URL
+    window.location.href = '/sign-in';
+  };
+
+
+  // if user logged in render UserNav
 
   return (
     <ReactBootstrap.Navbar expand="lg" className="navbar">
@@ -52,9 +75,16 @@ function Topnav() {
 
           
         </ReactBootstrap.Nav>
-        
+          {!loggedIn ? (
+          <>
           <ReactBootstrap.Nav.Link className="button-link" style={{ marginRight: '20px' }} onClick={handleSignInClick}>Sign In</ReactBootstrap.Nav.Link>
           <coreButton className="coreButton" id="login" type="submit" onClick={handleSignUpClick} style={{ marginLeft: '20px' }}>Sign Up</coreButton>
+          </>
+          ):(<>
+          <ReactBootstrap.Nav.Link className="button-link" style={{ marginRight: '20px' }} onClick={handleSignOutClick}>Log Out</ReactBootstrap.Nav.Link>
+          <coreButton className="coreButton" type="submit" onClick={handleProfile} style={{ marginLeft: '20px' }}>My Profile</coreButton>
+          </>
+          )}
 
       </ReactBootstrap.Navbar.Collapse>
     </ReactBootstrap.Container>
@@ -62,5 +92,6 @@ function Topnav() {
 
   );
 }
+
 
 export default Topnav;

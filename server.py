@@ -88,32 +88,32 @@ def sign_in_user():
 
 
 
-@app.route('/homepage/user')
-def homepage_user():
-    """view homepage"""
+# @app.route('/homepage/user')
+# def homepage_user():
+#     """view homepage"""
 
-    # Check if the user is in the session
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user = User.query.get(user_id)
+#     # Check if the user is in the session
+#     if 'user_id' in session:
+#         user_id = session['user_id']
+#         user = User.query.get(user_id)
 
-        if user:
-            user_name = user.screen_name  # Replace with the actual property that stores the user's name
-            return render_template('user-homepage.html', user_name=user_name)
+#         if user:
+#             user_name = user.screen_name  # Replace with the actual property that stores the user's name
+#             return render_template('user-homepage.html', user_name=user_name)
 
-    # If user not in session, redirect to sign-in page
-    flash("Please sign in to access the homepage.", 'error')
-    return redirect(url_for('sign_in_page'))
-
-
-@app.route('/homepage/user')
-def user_homepage():
-    """homepage once the user signs in"""
-
-    return 'user homepage'
+#     # If user not in session, redirect to sign-in page
+#     flash("Please sign in to access the homepage.", 'error')
+#     return redirect(url_for('sign_in_page'))
 
 
-@app.route('/api/user-profile')
+# @app.route('/homepage/user')
+# def user_homepage():
+#     """homepage once the user signs in"""
+
+#     return 'user homepage'
+
+
+@app.route('/check_login')
 def get_user_profile():
     # Check if the user is logged in
     if 'user_id' not in session:

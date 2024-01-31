@@ -5,7 +5,14 @@
 // import Navbar from 'https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js';
 
 import Buttons from '/static/jsx/coreButton.js';
+import isLoggedIn from '/static/jsx/auth.js';
 function Topnav() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  React.useEffect(() => {
+    fetch('/check_login').then(response => {
+      setLoggedIn(response.ok);
+    }), [];
+  });
   const handleSignUpClick = () => {
     // Use window.location.href to navigate to the desired URL
     window.location.href = '/sign-up';
@@ -20,6 +27,17 @@ function Topnav() {
   const handleLogoClick = () => {
     window.location.href = '/homepage';
   };
+  const handleProfile = () => {
+    // Use window.location.href to navigate to the desired URL
+    window.location.href = '/profile';
+  };
+  const handleSignOutClick = () => {
+    // Use window.location.href to navigate to the desired URL
+    window.location.href = '/sign-in';
+  };
+
+  // if user logged in render UserNav
+
   return /*#__PURE__*/React.createElement(ReactBootstrap.Navbar, {
     expand: "lg",
     className: "navbar"
@@ -48,7 +66,7 @@ function Topnav() {
     onClick: handleExcursionClick
   }, "Excursions"), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
     className: "button-link"
-  }, "Map")), /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
+  }, "Map")), !loggedIn ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
     className: "button-link",
     style: {
       marginRight: '20px'
@@ -62,6 +80,19 @@ function Topnav() {
     style: {
       marginLeft: '20px'
     }
-  }, "Sign Up"))));
+  }, "Sign Up")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ReactBootstrap.Nav.Link, {
+    className: "button-link",
+    style: {
+      marginRight: '20px'
+    },
+    onClick: handleSignOutClick
+  }, "Log Out"), /*#__PURE__*/React.createElement("coreButton", {
+    className: "coreButton",
+    type: "submit",
+    onClick: handleProfile,
+    style: {
+      marginLeft: '20px'
+    }
+  }, "My Profile")))));
 }
 export default Topnav;
