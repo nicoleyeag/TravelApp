@@ -93,7 +93,7 @@ def create_trip_route():
     print("create trip route")
 
     # Retrieve data from the request
-    user_id = session.get('user_id')  # You need to implement this function
+    user_id = session.get('user_id')
     data = request.json
     title = data.get('title')
     description = data.get('description')
@@ -113,8 +113,63 @@ def create_trip_route():
 
 
 
+@app.route('/trips', methods=['GET'])
+def get_trips():
+    print("yo getting trips")
+    try:
+        # Retrieve user_id from the session
+        user_id = session.get('user_id')
+        print(user_id)
+
+        if not user_id:
+            return jsonify({'error': 'User not found'}), 404
+
+        # Assuming you have a relationship between User and Trip
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        trips = user.trip
+
+        # Convert trips to a list of dictionaries
+        trips_data = [{'trip_id': trip.trip_id, 'title': trip.title, 'description': trip.description,
+                       'start_date': str(trip.start_date), 'end_date': str(trip.end_date), 'budget': trip.budget}
+                      for trip in trips]
+
+        return jsonify(trips_data)
+    except Exception as e:
+        print(f"Error fetching trips: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
 
 
+
+
+@app.route('/add_excursion_to_trip', methods=['POST'])
+def add_excursion_to_trip():
+    print("Adding excursion to trip")
+    # post req from card data
+    # Retrieve data from the request
+    data = request.json
+    trip_id = data.get('trip_id')
+    price = data.get('price')
+    start_time = datetime.strptime(data.get('start_time'), '%Y-%m-%dT%H:%M')  # Assuming the format is like '2022-02-01T12:00:00'
+    end_time = datetime.strptime(data.get('end_time'), '%Y-%m-%dT%H:%M')  # Assuming the format is like '2022-02-01T14:00:00'
+    title = data.get('title')
+    description = data.get('description')
+    lattitude = data.get('latitude')
+    longitude = data.get('longitude')
+    street_address = data.get('street_address')
+    excursion_type = data.get('excursion_type')
+
+    # You may need to adjust these parameter names based on your data
+
+    # Create the excursion
+    result = crud.create_excursion(trip_id, price, start_time, end_time, title, description, lattitude, longitude, street_address, excursion_type)
+
+    if result:
+        return jsonify({'success': True, 'message': 'Excursion added successfully'})
+    else:
+        return jsonify({'success': False, 'error': result.get('error')}), 400
 
 
 @app.route('/check_login')

@@ -40,7 +40,7 @@ function SearchBy() {
             <GridRow key={index}>
               {excursion.slice(index, index + 3).map((locationData) => (
                 <GridCol key={locationData.location_id}>
-                  <Card locationData={locationData} />
+                  <Card locationData={locationData}/>
                 </GridCol>
         ))}
       </GridRow>

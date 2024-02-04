@@ -77,6 +77,37 @@ def create_trip(user_id, title, description, start_date, end_date, budget):
     flash("trip added!")
 
 
+def create_excursion(trip_id, price, start_time, end_time, title, description, lattitude, longitude, street_address, excursion_type):
+    # Check if an excursion with the same title already exists for the specified trip
+    existing_excursion = Excursion.query.filter_by(trip_id=trip_id, title=title).first()
+
+    if existing_excursion:
+        return jsonify({'success': False, 'error': 'Excursion with the same title already exists for this trip'})
+
+    # Create a new Excursion object
+    new_excursion = Excursion(
+        trip_id=trip_id,
+        price=price,
+        start_time=start_time,
+        end_time=end_time,
+        title=title,
+        description=description,
+        lattitude=lattitude,
+        longitude=longitude,
+        street_address=street_address,
+        excursion_type=excursion_type
+    )
+
+# take this information from the modal
+
+    # Add the new_excursion to the database
+    db.session.add(new_excursion)
+    db.session.commit()
+
+    return jsonify({'success': True, 'message': 'Excursion created successfully'})
+
+
+
 ###any functions that has to do with your database
     
 if __name__ == '__main__':

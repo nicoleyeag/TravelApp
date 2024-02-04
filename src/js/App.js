@@ -8,6 +8,7 @@ import SignUpForm from '/static/jsx/signUp.js';
 import SignInForm from '/static/jsx/signIn.js';
 import ProfilePage from '/static/jsx/profile.js'
 import CreateTripForm from '/static/jsx/createTrip.js'
+import TripList from '/static/jsx/myTrips.js'
 // import isLoggedIn from '/static/jsx/auth.js';
 // import RedirectButton from 'static/jsx/login.js';
 
@@ -61,8 +62,8 @@ if (currentPage === '/sign-in') {
 
 if (currentPage === '/profile') {
     ReactDOM.render(<ProfilePage />, document.getElementById('userProfile'));
-    ReactDOM.render(React.createElement(CreateTripForm ),document.getElementById('createTrip')
-      );
+    ReactDOM.render(React.createElement(CreateTripForm ),document.getElementById('createTrip'));
+    ReactDOM.render(<TripList />, document.getElementById('tripList'));
 }
 
 
