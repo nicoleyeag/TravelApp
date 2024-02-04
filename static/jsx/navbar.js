@@ -25,7 +25,7 @@ function Topnav() {
     window.location.href = '/excursions';
   };
   const handleLogoClick = () => {
-    window.location.href = '/homepage';
+    window.location.href = '/';
   };
   const handleProfile = () => {
     // Use window.location.href to navigate to the desired URL
@@ -50,7 +50,8 @@ function Topnav() {
     width: "280",
     height: "115",
     className: "d-inline-block align-top",
-    alt: "OMW"
+    alt: "OMW",
+    onClick: handleLogoClick
   })), /*#__PURE__*/React.createElement(ReactBootstrap.Navbar.Toggle, {
     "aria-controls": "navbarScroll"
   }), /*#__PURE__*/React.createElement(ReactBootstrap.Navbar.Collapse, {

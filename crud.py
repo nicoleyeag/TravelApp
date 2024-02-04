@@ -107,6 +107,73 @@ def create_excursion(trip_id, price, start_time, end_time, title, description, l
     return jsonify({'success': True, 'message': 'Excursion created successfully'})
 
 
+def get_trip_by_id(trip_id):
+    """Get trip details by trip_id."""
+
+    # Query the database for the trip with the provided trip_id
+    trip = Trip.query.get(trip_id)
+
+
+    return trip
+
+def get_excursions_by_tripid(trip_id):
+    """Get excursions by trip_id."""
+
+    # Query the database for the trip with the provided trip_id
+    excursions = Excursion.query.filter(Excursion.trip_id == trip_id)
+    # add sort or orderby at the end of this function ^^
+
+    return excursions
+
+
+def get_excursion_by_id(excursion_id):
+    """Get excursion details by excursion_id."""
+
+    # Query the database for the excursion with the provided excursion_id
+    excursion = Excursion.query.get(excursion_id)
+
+    return excursion
+
+
+def update_trip(trip):
+    try:
+        # Log the changes before the update
+        print(f"Updating Trip - Before: {trip}")
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        # Log the changes after the update
+        print(f"Updating Trip - After: {trip}")
+
+        return True
+    except Exception as e:
+        # Rollback the transaction in case of an error
+        db.session.rollback()
+        print(f"Error updating trip: {e}")
+        return False
+
+
+
+def update_excursion(excursion):
+    try:
+        # Log the changes before the update
+        print(f"Updating Excursion - Before: {excursion}")
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        # Log the changes after the update
+        print(f"Updating Excursion - After: {excursion}")
+
+        return True
+    except Exception as e:
+        # Rollback the transaction in case of an error
+        db.session.rollback()
+        print(f"Error updating excursion: {e}")
+        return False
+    
+
 
 ###any functions that has to do with your database
     

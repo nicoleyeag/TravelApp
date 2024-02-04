@@ -30,7 +30,7 @@ const ProfilePage = () => {
     className: "img-fluid rounded-circle"
   })), /*#__PURE__*/React.createElement("div", {
     className: "col-md-8"
-  }, /*#__PURE__*/React.createElement("h1", null, userData.screen_name), /*#__PURE__*/React.createElement("p", null, userData.email))), userData.trips && userData.trips.length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h1", null, "\uD83D\uDC4B ", userData.screen_name), /*#__PURE__*/React.createElement("p", null, "Email: ", userData.email))), userData.trips && userData.trips.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "mt-4"
   }, /*#__PURE__*/React.createElement("h2", null, "My Trips"), /*#__PURE__*/React.createElement("ul", {
     className: "list-group"

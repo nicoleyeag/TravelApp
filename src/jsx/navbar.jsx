@@ -35,7 +35,7 @@ function Topnav() {
   };
 
   const handleLogoClick = () => {
-    window.location.href = '/homepage';
+    window.location.href = '/';
   };
 
   const handleProfile = () => {
@@ -61,6 +61,7 @@ function Topnav() {
               height="115"
               className="d-inline-block align-top"
               alt="OMW"
+              onClick={handleLogoClick}
             />
       </ReactBootstrap.Navbar.Brand>
       <ReactBootstrap.Navbar.Toggle aria-controls="navbarScroll"/>

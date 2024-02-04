@@ -200,11 +200,129 @@ def profile():
     return render_template('profile.html')
 
 
-
+# --- TRIP PAGE ----------------------------------------------
 
 @app.route('/trip-page')
 def trip_page():
-    return 'This is the trip page'
+    # Use the trip_id parameter in your code to fetch details or render the trip page
+    return render_template('trip-page.html')
+
+
+@app.route('/trip-page/<int:trip_id>')
+def trip_page_info(trip_id):
+    # Fetch details for the specified trip_id (modify this based on your data model)
+
+    trip = crud.get_trip_by_id(trip_id)
+    excursions = crud.get_excursions_by_tripid(trip_id)
+
+    if trip:
+        # Convert trip data to a dictionary and pass it to the template
+        trip_data = {
+            'trip_id': trip.trip_id,
+            'title': trip.title,
+            'description': trip.description,
+            'start_date': str(trip.start_date),
+            'end_date': str(trip.end_date),
+            'budget': trip.budget,
+            # Add other trip data as needed
+        }
+        excursion_lst = []
+        for excursion in excursions:
+            excursion_data = {
+                'excursion_id' : excursion.excursion_id,
+                'trip_id': excursion.trip_id,
+                'price': excursion.price,
+                'start_time': excursion.start_time,
+                'end_time' : excursion.end_time,
+                'title' : excursion.title,
+                'description' : excursion.description,
+                'lattitude' : excursion.lattitude,
+                'longitude' : excursion.longitude,
+                'street_address' : excursion.street_address,
+                'excursion_type' : excursion.excursion_type
+            }
+            excursion_lst.append(excursion_data)
+        
+        trip_data["excursions"] = excursion_lst
+        
+        return jsonify(trip_data)
+
+    else:
+        # Trip not found, return an error response (modify as needed)
+        return jsonify({'error': 'Trip not found'}), 404
+
+
+# --- EDIT TRIP -------------------------------------------------------------
+    
+@app.route('/edit-trip/<int:trip_id>', methods=['POST'])
+def edit_trip_route(trip_id):
+    print("EDIT TRIP")
+    try:
+        # Get the updated trip data from the request JSON
+        updated_data = request.json
+
+        # Fetch the current trip data from the database
+        current_trip = crud.get_trip_by_id(trip_id)
+
+        if current_trip is None:
+            return jsonify({'error': 'Trip not found'}), 404
+
+        # Update the trip data
+        current_trip.title = updated_data.get('title', current_trip.title)
+        current_trip.description = updated_data.get('description', current_trip.description)
+        current_trip.start_date = updated_data.get('start_date', current_trip.start_date)
+        current_trip.end_date = updated_data.get('end_date', current_trip.end_date)
+        current_trip.budget = updated_data.get('budget', current_trip.budget)
+
+        # Call a function to update the trip in the database
+        new_trip = crud.update_trip(current_trip)  # Implement this function in your database module
+
+        if new_trip:
+            return jsonify({'message': 'Trip updated successfully'}), 200
+        else:
+            return jsonify({'error': 'Failed to update trip'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+# --- EDIT EXCURSION --------------------------------------------------------
+    
+@app.route('/edit-excursion/<int:excursion_id>', methods=['POST'])
+def edit_excursion_route(excursion_id):
+    try:
+        # Get the updated excursion data from the request JSON
+        updated_data = request.json
+
+        # Fetch the current excursion data from the database
+        current_excursion = crud.get_excursion_by_id(excursion_id)  # Implement this function in your CRUD module
+
+        if current_excursion is None:
+            return jsonify({'error': 'Excursion not found'}), 404
+
+        # Update the excursion data
+
+        current_excursion.title = updated_data.get('title', current_excursion.title)
+        current_excursion.description = updated_data.get('description', current_excursion.description)
+        current_excursion.start_time = updated_data.get('start_time', current_excursion.start_time)
+        current_excursion.end_time = updated_data.get('end_time', current_excursion.end_time)
+        current_excursion.excursion_type = updated_data.get('excursion_type', current_excursion.excursion_type)
+        # Add other fields as needed
+
+        # Call a function to update the excursion in the database
+        new_excursion = crud.update_excursion(current_excursion)  # Implement this function in your CRUD module
+
+        if new_excursion:
+            return jsonify({'message': 'Excursion updated successfully'}), 200
+        else:
+            return jsonify({'error': 'Failed to update excursion'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# --- EXCURSION PAGE --------------------------------------------
 
 @app.route('/excursions')
 def explore():
