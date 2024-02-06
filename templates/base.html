@@ -36,23 +36,32 @@
 </head>
 
 <body>
+  <style>
+    body {
+      background-image: url("static/img/background.jpg");  
+    }  
+  </style>
+
+  <div id="topnav" ></div>
   <!-- remove this if once user session -->
-  {# For demo purposes, show our sessions #}
+  <!-- {# For demo purposes, show our sessions #}
     {% if session %}
     
         <label>Flask Session</label>
         {{ session }}
       
-    {% endif %}
+    {% endif %} -->
 
   <!-- NAV -->
-  <div id="topnav" ></div>
+  <div class="pageLayout">
+    <div id="topnav" ></div>
 
 
-  <div class="main-body">
-    {% block body %}
+    <div class="main-body">
+      {% block body %}
 
-    {% endblock %}
+      {% endblock %}
+    </div>
   </div>
 
 

@@ -33,21 +33,36 @@ function SignInForm() {
       }
     }).catch(error => console.error('Error fetching user data:', error));
   };
-  return /*#__PURE__*/React.createElement(ReactBootstrap.Form, null, /*#__PURE__*/React.createElement(ReactBootstrap.Row, {
-    className: "mb-3"
+  return /*#__PURE__*/React.createElement(ReactBootstrap.Form, {
+    className: "sign-in-form"
+  }, /*#__PURE__*/React.createElement(ReactBootstrap.Row, {
+    className: "headerForm"
+  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, {
+    id: "LoginTop"
+  }, "Hello There! \uD83D\uDC4B")), /*#__PURE__*/React.createElement(ReactBootstrap.Row, {
+    className: "email"
   }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, {
     as: ReactBootstrap.Col,
     controlId: "formGridEmail"
-  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Email"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
+  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, {
+    id: "inputLogin"
+  }, "Email"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
+    className: "placeholderForm",
     type: "email",
     placeholder: "Enter email"
-  })), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, {
+  }))), /*#__PURE__*/React.createElement(ReactBootstrap.Row, {
+    className: "password"
+  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Group, {
     as: ReactBootstrap.Col,
     controlId: "formGridPassword"
-  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, null, "Password"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
+  }, /*#__PURE__*/React.createElement(ReactBootstrap.Form.Label, {
+    id: "inputLogin"
+  }, "Password"), /*#__PURE__*/React.createElement(ReactBootstrap.Form.Control, {
+    className: "placeholderForm",
     type: "password",
     placeholder: "Password"
   }))), /*#__PURE__*/React.createElement("coreButton", {
+    id: "signInButton",
     className: "coreButton",
     type: "submit",
     onClick: handleSignIn

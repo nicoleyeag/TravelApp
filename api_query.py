@@ -23,6 +23,8 @@ def get_photos(location_id):
                 'thumbnail_url': images.get('thumbnail', {}).get('url', ''),
                 'small_url': images.get('small', {}).get('url', ''),
                 'med_url': images.get('medium', {}).get('url', ''),
+                'large_url': images.get('large', {}).get('url', ''),
+
             }
             photo_list.append(photo_info)
 
@@ -45,26 +47,27 @@ def get_location_details(location_id):
         headers = {"accept": "application/json"}
 
         res_details = requests.get(details_url, params=params, headers=headers)
-        res_details.raise_for_status()  # Raise an HTTPError for bad responses
-        details_data = res_details.json()
 
-        # Ensure that 'description' is present in details_data
-        if 'description' in details_data:
-            description = details_data['description']
-            limited_description = description[:120] + ("..." if len(description) > 120 else "")
-            print(limited_description)
-            return limited_description
-        else:
-            print("Description not found in location details. Returning default description.")
-            return "no description"
+        # Check the status code directly
+        if res_details.status_code == 200:
+            details_data = res_details.json()
 
-    except requests.exceptions.HTTPError as errh:
-        if errh.response.status_code == 404:
+            # Ensure that 'description' is present in details_data
+            if 'description' in details_data:
+                description = details_data['description']
+                # limited_description = description[:120] + ("..." if len(description) > 120 else "")
+                # print(limited_description)
+                return description
+            else:
+                desc = "Description not found in location details. This place is still kinda cool. Despite the absence of specific information, we can assure you that it's a unique spot worth exploring. Even though we don't have all the details, it's bound to be an exciting adventure. Returning default description."
+                return desc
+        elif res_details.status_code == 404:
             print("Location not found. Returning custom description.")
+            desc = "Description not found in location details. This place is still kinda cool. Despite the absence of specific information, we can assure you that it's a unique spot worth exploring. Even though we don't have all the details, it's bound to be an exciting adventure. Returning default description."
+            return desc
         else:
-            print(f"HTTP Error in get_location_details: {errh}")
+            print(f"Unexpected status code in get_location_details: {res_details.status_code}")
             print(f"Response content: {res_details.content}")  # Log the response content
-            raise  # Re-raise the exception for other HTTP errors
 
     except Exception as e:
         print(f"An error occurred in get_location_details: {str(e)}")

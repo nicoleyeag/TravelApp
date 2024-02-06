@@ -44,27 +44,36 @@ function SignUpForm() {
 
 
   return (
-    <ReactBootstrap.Form>
-      <ReactBootstrap.Row className="mb-3">
-        <ReactBootstrap.Form.Group as={ReactBootstrap.Col} controlId="formGridEmail">
-          <ReactBootstrap.Form.Label>Email</ReactBootstrap.Form.Label>
-          <ReactBootstrap.Form.Control type="email" placeholder="Enter email" />
-        </ReactBootstrap.Form.Group>
+    <ReactBootstrap.Form className="sign-up-form">
 
+      <ReactBootstrap.Form.Label id="LoginTop">
+        Welcome! 🙌
+          
+        </ReactBootstrap.Form.Label>
+
+      <ReactBootstrap.Row className="email">
+        <ReactBootstrap.Form.Group as={ReactBootstrap.Col} controlId="formGridEmail">
+          <ReactBootstrap.Form.Label id="inputLogin" >Email</ReactBootstrap.Form.Label>
+          <ReactBootstrap.Form.Control className="placeholderForm" type="email" placeholder="Enter email" />
+        </ReactBootstrap.Form.Group>
+        </ReactBootstrap.Row>
+
+        <ReactBootstrap.Row className="password">
         <ReactBootstrap.Form.Group as={ReactBootstrap.Col} controlId="formGridPassword">
-          <ReactBootstrap.Form.Label>Password</ReactBootstrap.Form.Label>
-          <ReactBootstrap.Form.Control type="password" placeholder="Password" />
+          <ReactBootstrap.Form.Label id="inputLogin">Password</ReactBootstrap.Form.Label>
+          <ReactBootstrap.Form.Control className="placeholderForm" type="password" placeholder="Password" />
         </ReactBootstrap.Form.Group>
       </ReactBootstrap.Row>
 
-      <ReactBootstrap.Form.Group className="mb-3" controlId="formGridUsername">
-        <ReactBootstrap.Form.Label>Screen Name</ReactBootstrap.Form.Label>
-        <ReactBootstrap.Form.Control type="screen_name" placeholder="username" />
-      </ReactBootstrap.Form.Group>
+      <ReactBootstrap.Row className="username">
+        <ReactBootstrap.Form.Group className="screenName" controlId="formGridUsername">
+          <ReactBootstrap.Form.Label id="inputLogin">Username</ReactBootstrap.Form.Label>
+          <ReactBootstrap.Form.Control className="placeholderForm" type="screen_name" placeholder="username" />
+        </ReactBootstrap.Form.Group>
+      </ReactBootstrap.Row>
 
 
-
-      <coreButton className="coreButton" type="submit" onClick={handleSignUp}>
+      <coreButton id="signUpButton" className="coreButton" type="submit" onClick={handleSignUp}>
         Sign Up
       </coreButton>
     </ReactBootstrap.Form>

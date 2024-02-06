@@ -75,6 +75,7 @@ def create_trip(user_id, title, description, start_date, end_date, budget):
     db.session.commit()
 
     flash("trip added!")
+    return jsonify({'success': True, 'message': 'Trip created successfully'})
 
 
 def create_excursion(trip_id, price, start_time, end_time, title, description, lattitude, longitude, street_address, excursion_type):

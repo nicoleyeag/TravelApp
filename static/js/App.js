@@ -6,19 +6,12 @@ import SearchBy from '/static/jsx/excursionSearch.js';
 // import LocationId from '/static/jsx/locationId.js';
 import SignUpForm from '/static/jsx/signUp.js';
 import SignInForm from '/static/jsx/signIn.js';
-import ProfilePage from '/static/jsx/profile.js';
-import CreateTripForm from '/static/jsx/createTrip.js';
+import ProfileUserInfo from '/static/jsx/profileUserInfo.js';
+import Mid from '/static/jsx/midProfile.js';
 import TripList from '/static/jsx/myTrips.js';
 import MyTripInfo from '/static/jsx/tripInfo.js';
-// import isLoggedIn from '/static/jsx/auth.js';
+import Banner from '/static/jsx/banner.js';
 // import RedirectButton from 'static/jsx/login.js';
-
-// // this will have all my base components
-// const domNode = document.getElementById('navigation');
-
-// // Use createRoot and render the Navbar component
-// const root = createRoot(domNode);
-// root.render(<Navbar />);
 
 const currentPage = window.location.pathname;
 
@@ -35,6 +28,9 @@ const currentPage = window.location.pathname;
 // }
 
 ReactDOM.render( /*#__PURE__*/React.createElement(Topnav, null), document.getElementById('topnav'));
+if (currentPage === '/') {
+  ReactDOM.render( /*#__PURE__*/React.createElement(Banner, null), document.getElementById('banner'));
+}
 if (currentPage === '/excursions') {
   ReactDOM.render( /*#__PURE__*/React.createElement(SearchBy, null), document.getElementById('searchby'));
 }
@@ -50,8 +46,8 @@ if (currentPage === '/sign-in') {
   ReactDOM.render( /*#__PURE__*/React.createElement(SignInForm, null), document.getElementById('signInForm'));
 }
 if (currentPage === '/profile') {
-  ReactDOM.render( /*#__PURE__*/React.createElement(ProfilePage, null), document.getElementById('userProfile'));
-  ReactDOM.render(React.createElement(CreateTripForm), document.getElementById('createTrip'));
+  ReactDOM.render( /*#__PURE__*/React.createElement(ProfileUserInfo, null), document.getElementById('userProfile'));
+  ReactDOM.render( /*#__PURE__*/React.createElement(Mid, null), document.getElementById('midProfile'));
   ReactDOM.render( /*#__PURE__*/React.createElement(TripList, null), document.getElementById('tripList'));
 }
 if (currentPage.startsWith('/trip-page')) {

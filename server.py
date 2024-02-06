@@ -86,7 +86,19 @@ def sign_in_user():
     return redirect('/sign-in')
 
 
+# --- SIGN OUT -----------------------------------------------------------------
+@app.route('/sign-out', methods=['POST'])
+def sign_out():
+    # Check if the user is authenticated before allowing sign-out
+    if 'user_id' in session:
+        # Perform sign-out actions (clear session, etc.)
+        session.clear()
+        return jsonify({'message': 'Successfully signed out'})
+    else:
+        return jsonify({'error': 'User not authenticated'}), 401
 
+
+# --- CREATE TRIP --------------------------------------------------------------
 
 @app.route('/create_trip', methods=['POST'])
 def create_trip_route():
@@ -101,15 +113,21 @@ def create_trip_route():
     end_date = data.get('end_date')
     budget = data.get('budget')
 
+    try:
     # Create the trip
-    trip = crud.create_trip(user_id, title, description, start_date, end_date, budget)
+        trip = crud.create_trip(user_id, title, description, start_date, end_date, budget)
+        print(trip)
 
-    if trip:
-    # Trip created successfully
-        return jsonify({'success': True, 'message': 'Trip created successfully'})
-    else:
-    # Error in creating the trip
-        return jsonify({'success': False, 'error': trip.get('error')}), 400
+        if trip:
+        # Trip created successfully
+            return jsonify({'success': True, 'message': 'Trip created successfully'})
+        else:
+        # Error in creating the trip
+            return jsonify({'success': False, 'error': trip['error']}), 400
+    
+    except Exception as e:
+        print(f"Error fetching trips: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
 
 
 

@@ -31,9 +31,24 @@ function Topnav() {
     // Use window.location.href to navigate to the desired URL
     window.location.href = '/profile';
   };
-  const handleSignOutClick = () => {
-    // Use window.location.href to navigate to the desired URL
-    window.location.href = '/sign-in';
+  const handleSignOutClick = async () => {
+    try {
+      // Make a request to your server to sign out and invalidate the session
+      const response = await fetch('/sign-out', {
+        method: 'POST',
+        // You can use 'GET' or 'POST' based on your server implementation
+        credentials: 'include' // Include credentials (cookies) for cross-origin requests
+      });
+      if (response.ok) {
+        // Redirect to the sign-in page or handle the success scenario
+        window.location.href = '/';
+      } else {
+        // Handle errors or show a message to the user
+        console.error('Sign-out error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during sign-out:', error);
+    }
   };
 
   // if user logged in render UserNav

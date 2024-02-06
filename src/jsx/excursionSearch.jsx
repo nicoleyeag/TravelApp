@@ -30,23 +30,26 @@ function SearchBy() {
   };
 
   return (
-    <div>
-      <SearchParams handleSubmitParams={handleSubmitParams} />
+    <div id="searchby" className="search-container">
+      <div className="search-params">
+        <SearchParams handleSubmitParams={handleSubmitParams} />
+      </div>
 
-      <GridLayout className = 'grid'>
-        {excursion.map((locationData, index) => (
-          // Create a new row for every three cards
-          index % 3 === 0 && (
-            <GridRow key={index}>
-              {excursion.slice(index, index + 3).map((locationData) => (
-                <GridCol key={locationData.location_id}>
-                  <Card locationData={locationData}/>
-                </GridCol>
-        ))}
-      </GridRow>
-          )
-        ))}
+      <div className="grid-container">
+        <GridLayout className="grid">
+          {excursion?.map((locationData, index) =>
+            index % 3 === 0 && (
+              <GridRow key={index}>
+                {excursion.slice(index, index + 3).map((locationData) => (
+                  <GridCol key={locationData.location_id}>
+                    <Card locationData={locationData} />
+                  </GridCol>
+                ))}
+              </GridRow>
+            )
+          )}
         </GridLayout>
+      </div>
     </div>
   );
 }

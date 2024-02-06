@@ -10,16 +10,17 @@
       <!-- end custom navbar -->
 
       {% block body %}
-        <h1> My Profile</h1>
+        <div id="userInfoRow">
+          <div id ="userProfile"></div>
+        </div>
+
         
-        <div id = "userProfile"></div>
+          <div id="midProfile"></div>
+          <!-- maybe put these in two divs and read left to right -->
 
-        <div id="createTrip"></div>
-
-        <div id="tripList"></div>
-
-
-
+        <div id="userTripRow">
+          <div id="tripList"></div>
+        </div>
       {% endblock %}
 
 

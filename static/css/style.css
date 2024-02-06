@@ -1,16 +1,29 @@
 .main-body {
-    display: flex;/* make this a flex box that will hold all other div elements */
-    margin: 0;
-    width: 100vw; /* 100% of the viewport width */
-    height: 100vh; /* 100% of the viewport height */
-    /* background-image: url("static/img/background.jpg"); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    flex-direction:column;
+    /* padding-left: 50px;
+    padding-right: 50px; */
+    padding: 0;
+    width: 90%;
+    height: 100%; /* 100% of the viewport height */
+    justify-content: center;
+    align-items: flex-start;
   }
 
-  
-/* NAV BAR */
+/* body {
+    margin: 0;
+    padding: 0;
+  } */
+
+.pageLayout {
+    display: flex;
+    flex-direction:column;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- NAV BAR -------------------------------------------------------------- */
 
 .navbar {
     background: #ffffff;
@@ -18,7 +31,7 @@
     margin-right: 40px;
 }
 
-/* BUTTONS */
+/* --- CORE BUTTON ---------------------------------------------------------- */
 .coreButton {
     all: unset;
     align-items: center;
@@ -31,6 +44,7 @@
     position: relative;
     background-color: #d38b5d;
     transition: 0.7s;
+    cursor: pointer;
 }
 
 .coreButton .text-wrapper {
@@ -55,7 +69,7 @@
     background-color: #2c5530;
 }
 
-/* LINK */
+/* --- LINK BUTTON ---------------------------------------------------------- */
 .button-link {
     align-items: center;
     display: inline-flex;
@@ -90,7 +104,7 @@
 
   }
 
-/* HOMEPAGE */
+/* --- HOMEPAGE ------------------------------------------------------------- */
 .homepage {
     background-color: #ffffff;
     display: flex;
@@ -98,74 +112,473 @@
     justify-content: center;
     width: 100%;
 }
-.image-container {
+
+/* --- HEADER HOMEPAGE ------------------------------------------------------ */
+.banner {
+    height: 521px;
     position: relative;
+    background: white;
+    width: 100% !important;
+  }
+
+.headerImg{
     width: 100%;
     height: 100%;
+    object-fit: cover;
+}
+  
+#headerButton.coreButton {
+    left: 596px;
+    top: 500px;
+    position: absolute;
+    width: 300px; /* Adjust this value as needed */
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+
+  }
+  
+.headerText {
+    width: 754px;
+    height: 45px;
+    left: 339px;
+    top: 250px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 36px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+
+
+
+/* --- LOGIN FORM BOX ------------------------------------------------------- */
+#signInForm {
+    position: relative;
+    top: -20%; 
     display: flex;
-    flex-direction: column;
-}
-.vector, .wave {
-    max-width: 100%; /* Set the maximum width to 100% of the parent container */
-    width: 100vw;    /* Set the initial width to 100% of the viewport width */
-    height: auto;    /* Maintain the aspect ratio as the width changes */
-}
-.content-container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /*this centers the container*/
-    margin-left: 40px;
-    margin-right: 40px;
-    text-align: center;
-}
-#planning {
-    width: 150%;
-    position: relative;
-    top: 70% !important;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-/* LOGIN FORM BOX */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the form takes the full height of the viewport */
+  }
+  
+  /* Adjust the styling for the form container */
 .sign-in-form {
-    width: 582px;
-    height: 637px;
-    }
-.sign-in-form .group {
-    width: 584px;
-    height: 637px;
-}
-.sign-in-form .overlap {
-    position: relative;
-    width: 582px;
-    height: 637px;
-    background-color: #ffffff;
-}
-.sign-in-form .rectangle {
-    position: absolute;
-    width: 582px;
-    height: 637px;
-    top: 0;
-    left: 0;
-    background-color: #739e8233;
+    justify-content: center;
+    align-items: center;
+    width: 400px; /* Adjust the width as needed */
+    height: 400px; /* Adjust the height as needed */
+    padding: 20px; /* Add some padding to the form container */
+    border: 1px solid #ddd; /* Add a border for better visibility */
+    border-radius: 8px;
+    background: rgba(115, 158, 130, 0.20);
+    margin: 0 auto;
+  }
+
+#signInButton {
+    display: flex;
+    padding: 10px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 100px;
+  }
+
+#LoginTop{
+    color: #000;
+    display: flex;
+    justify-content: center;
+    font-family: "Mr Eaves San OT";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
-/* ACCORDIAN */
-.accordian {
+#inputLogin {
+
+    color: #8f8080;
+    text-align: center;
+    font-family: "Mr Eaves San OT";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.placeholderForm {
+    display: inline-block;
+    font-family: "Mr Eaves San OT";
+    min-height: 1em;
+    vertical-align: middle;
+    opacity: .5;
+    color: #ffffff;
+
+}
+
+.formLogin {
+    display: flex;
     width:100%;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 20px; 
+    justify-content: center;
 }
 
-/* SEARCH GRID */
+/* --- SIGN UP PAGE --------------------------------------------------------- */
+/* --- SIGN UP FORM BOX ----------------------------------------------------- */
+#signUpForm {
+    position: relative;
+    top: -20%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the form takes the full height of the viewport */
+  }
+  
+  /* Adjust the styling for the form container */
+.sign-up-form {
+    justify-content: center;
+    align-items: center;
+    width: 400px; /* Adjust the width as needed */
+    height: 400px; /* Adjust the height as needed */
+    padding: 20px; /* Add some padding to the form container */
+    border: 1px solid #ddd; /* Add a border for better visibility */
+    border-radius: 8px;
+    background: rgba(115, 158, 130, 0.20);
+    margin: 0 auto;
+  }
+
+#signUpButton {
+    display: flex;
+    padding: 10px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 70px;
+  }
+
+
+/* --- EXCURSIONS PAGE ------------------------------------------------------ */
+/* --- ACCORDIAN ------------------------------------------------------------ */
+#searchby.accordian {
+    width: 100%;
+}
+
+.accordion-item {
+    background-color: rgba(115, 158, 130, 0.20) !important;
+    /* background-color: rgba(115, 158, 130, 0.20); */
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+    
+}
+.accordion-button {
+    background-color:rgba(115, 158, 130)!important;
+  }
+
+
+/* .accordion-header {
+    --bs-heading-color: rgba(115, 158, 130) !important;
+} */
+
+.search-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the search params section */
+  .search-params {
+    background-color: #f8f8f8;
+    padding: 20px;
+    /* border: 1px solid #ddd;
+    border-radius: 8px; */
+  }
+
+  /* Styles for the grid container */
+  .grid-container {
+    /* Add styles as needed */
+  }
+
+
+/* --- SEARCH GRID ---------------------------------------------------------- */
 .container {
     margin: 40px
 }
 
-/* CARD */
+/* --- EXCURSION CARD ----------------------------------------------------------------- */
 .card {
     margin: 10px
+}
+/* New Location ID Card Styles */
+.location-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .location-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .location-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .location-card .card-body {
+    padding: 20px;
+  }
+  
+  .location-card h5 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .location-card p {
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+
+#excursionButton {
+    /* Ensure button is always at the bottom */
+    margin-top: auto;
+    margin-right: 100px;
+  }
+
+/* --- ADD TO TRIP MODAL ---------------------------------------------------- */
+
+.trip_id {
+    width:100%;
+}
+  
+
+
+/* --- PROFILE PAGE---------------------------------------------------------- */
+
+#userInfoRow {
+    width:100%;
+}
+
+.containerUserInfo {
+
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background: rgba(255, 255, 255, 0);
+
+  }
+  
+.label {
+    position: absolute;
+    color: black;
+    font-size: 25px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 700;
+    word-wrap: break-word;
+  }
+  
+.label.email {
+    left: 433px;
+    top: 98px;
+  }
+  
+.label.location {
+    left: 433px;
+    top: 164px;
+  }
+  
+.label.name {
+    left: 433px;
+    top: 32px;
+  }
+  
+.userImg {
+    width: 270px;
+    height: 270px;
+    position: absolute;
+    background: #D9D9D9;
+  }
+
+
+/* --- MID PROFILE PAGE ----------------------------------------------------- */
+
+#midProfile {
+    width: 100%;
+}
+
+.mid {
+    width: 100%;
+    /* height: 196px; */
+
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+
+
+  }
+  
+  .MyTripsText {
+    color: black;
+    font-size: 25px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 700;
+    word-wrap: break-word;
+    font-size: 34px;
+  }
+  
+  #createTripButton.coreButton {
+
+    padding: 10px 30px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+    font-size: 16px; /* Set the desired font size */
+    font-weight: bold; /* Make the font bold */
+
+  }
+
+  /* --- MY TRIPS PROFILE --------------------------------------------------- */
+
+  #userTripRow {
+    width: 100%
+  }
+
+  #myTrips.grid {
+    width:100%;
+  }
+
+.profileCard:hover {
+    transform: translateY(-5px);
+}
+
+  .profileCard {
+    flex: 1; /* Distribute available space equally among cards */
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardTitle {
+    font-size: 1.5em; /* Increase the font size for the title */
+    color: #333; /* Set a darker text color */
+  }
+  
+  .cardDescription {
+    color: #666; /* Set a slightly darker text color for the description */
+  }
+  
+  .cardDate {
+    font-weight: bold; /* Make the date text bold */
+  }
+  
+  .cardBudget {
+    color: green; /* Set a green color for the budget text */
+  }
+  
+  /* --- MODAL DESIGN ------------------------------------------------------- */
+
+/* CSS for CreateTripForm */
+.modal-form {
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+  }
+  
+  .modal-form {
+    padding: 20px;
+  }
+  
+  .modal-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 700;
+  }
+  
+  .modal-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-form label {
+    margin-bottom: 15px;
+    font-size: 25px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 500;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .modal-form textarea,
+  .modal-form input,
+  .modal-form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+  }
+
+  #createTrip.modal-content {
+    width:60% !important;
+  }
+
+  /* #addtotrip.modal-content {
+    width:80% !important;
+  } */
+
+  .modal.show .modal-dialog {
+    display: flex;
+    justify-content: center;
+  }
+
+.coreButton#editExcursion {
+    display: flex;
+}
+.coreButton#editTrip {
+    display: flex;
+}
+
+.coreButton#modalButton {
+    width:100%;
+    margin-top:10px;
+}
+
+/* --- TRIP PAGE ------------------------------------------------------------ */
+
+#trip {
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+#mytripinfo {
+    width:80%;
+}
+
+.coreButton#tripPageEdit {
+    margin:20px;
+}
+
+.cardDescription#wrapDesc {
+    display: flex;
+    flex-wrap:wrap;
+    width:80%
 }

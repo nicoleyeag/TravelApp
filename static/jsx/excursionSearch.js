@@ -23,18 +23,23 @@ function SearchBy() {
     // You might not need to navigate away from the page if you are updating state and re-rendering
     // window.location.href = `/excursions/search?searchQuery=${encodeURIComponent(searchQuery)}`;
   };
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SearchParams, {
+  return /*#__PURE__*/React.createElement("div", {
+    id: "searchby",
+    className: "search-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "search-params"
+  }, /*#__PURE__*/React.createElement(SearchParams, {
     handleSubmitParams: handleSubmitParams
-  }), /*#__PURE__*/React.createElement(GridLayout, {
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "grid-container"
+  }, /*#__PURE__*/React.createElement(GridLayout, {
     className: "grid"
-  }, excursion.map((locationData, index) =>
-  // Create a new row for every three cards
-  index % 3 === 0 && /*#__PURE__*/React.createElement(GridRow, {
+  }, excursion?.map((locationData, index) => index % 3 === 0 && /*#__PURE__*/React.createElement(GridRow, {
     key: index
   }, excursion.slice(index, index + 3).map(locationData => /*#__PURE__*/React.createElement(GridCol, {
     key: locationData.location_id
   }, /*#__PURE__*/React.createElement(Card, {
     locationData: locationData
-  })))))));
+  }))))))));
 }
 export default SearchBy;
