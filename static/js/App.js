@@ -11,6 +11,7 @@ import Mid from '/static/jsx/midProfile.js';
 import TripList from '/static/jsx/myTrips.js';
 import MyTripInfo from '/static/jsx/tripInfo.js';
 import Banner from '/static/jsx/banner.js';
+import Wave from '/static/jsx/wave.js';
 // import RedirectButton from 'static/jsx/login.js';
 
 const currentPage = window.location.pathname;
@@ -30,6 +31,7 @@ const currentPage = window.location.pathname;
 ReactDOM.render( /*#__PURE__*/React.createElement(Topnav, null), document.getElementById('topnav'));
 if (currentPage === '/') {
   ReactDOM.render( /*#__PURE__*/React.createElement(Banner, null), document.getElementById('banner'));
+  ReactDOM.render( /*#__PURE__*/React.createElement(Wave, null), document.getElementById('wave'));
 }
 if (currentPage === '/excursions') {
   ReactDOM.render( /*#__PURE__*/React.createElement(SearchBy, null), document.getElementById('searchby'));

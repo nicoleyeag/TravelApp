@@ -56,14 +56,21 @@
   <div class="pageLayout">
     <div id="topnav" ></div>
 
+    
+        <!-- Content outside of main-body -->
+    <div id="outofmainbody">
+      {% block outofmainbody %}
+        <!-- Your content outside of main-body goes here -->
+      {% endblock %}
+    </div>
 
+    <!-- Main Body Section -->
     <div class="main-body">
       {% block body %}
-
+        <!-- Your main body content goes here -->
       {% endblock %}
     </div>
   </div>
-
 
 </body>
 

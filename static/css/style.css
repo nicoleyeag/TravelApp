@@ -4,7 +4,7 @@
     /* padding-left: 50px;
     padding-right: 50px; */
     padding: 0;
-    width: 90%;
+    width: 80%;
     height: 100%; /* 100% of the viewport height */
     justify-content: center;
     align-items: flex-start;
@@ -76,8 +76,8 @@
     gap: 10px;
     justify-content: center;
     padding: 10px;
-        padding-left: 40px;
-        padding-right: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
     position: relative;
     color: #000000;
     transition: 0.7s;
@@ -113,58 +113,58 @@
     width: 100%;
 }
 
-/* --- HEADER HOMEPAGE ------------------------------------------------------ */
-.banner {
-    height: 521px;
+
+/* --- OUT OF MAIN BODY ----------------------------------------------------- */
+#outofmainbody {
+    width:100%;
+}
+
+
+/* --- BANNER HOMEPAGE ------------------------------------------------------ */
+#banner {
+    height: 400px;
     position: relative;
     background: white;
     width: 100% !important;
   }
 
-.headerImg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* --- WAVE HOMEPAGE -------------------------------------------------------- */
+
+#wave {
+    width:100%;
+    display: flex;
 }
-  
-#headerButton.coreButton {
-    left: 596px;
-    top: 500px;
-    position: absolute;
-    width: 300px; /* Adjust this value as needed */
-    border-radius: 30px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    display: inline-flex;
+
+.wave {
+    width:100%;
 
   }
   
-.headerText {
-    width: 754px;
-    height: 45px;
-    left: 339px;
-    top: 250px;
-    position: absolute;
-    text-align: center;
-    color: black;
-    font-size: 36px;
-    font-family: 'Mr Eaves San OT';
-    font-weight: 700;
-    word-wrap: break-word;
+/* #imagewave {
+    width:100%;
+    height: 100%;
+    
+} */
+
+#wavevector {
+    width:100%;
+    height: 100%;
 }
 
-
+  #aboutus {
+    width:100%;
+    height: 100%;
+  }
 
 
 /* --- LOGIN FORM BOX ------------------------------------------------------- */
 #signInForm {
     position: relative;
-    top: -20%; 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh; /* Ensure the form takes the full height of the viewport */
+    margin:20px;
   }
   
   /* Adjust the styling for the form container */
@@ -202,7 +202,7 @@
 
 #inputLogin {
 
-    color: #8f8080;
+    color: #000000;
     text-align: center;
     font-family: "Mr Eaves San OT";
     font-size: 16px;
@@ -231,11 +231,11 @@
 /* --- SIGN UP FORM BOX ----------------------------------------------------- */
 #signUpForm {
     position: relative;
-    top: -20%; 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh; /* Ensure the form takes the full height of the viewport */
+    margin: 20px;
   }
   
   /* Adjust the styling for the form container */
@@ -386,17 +386,17 @@
   }
   
 .label.email {
-    left: 433px;
+    left: 350px;
     top: 98px;
   }
   
 .label.location {
-    left: 433px;
+    left: 350px;
     top: 164px;
   }
   
 .label.name {
-    left: 433px;
+    left: 350px;
     top: 32px;
   }
   
@@ -581,4 +581,13 @@
     display: flex;
     flex-wrap:wrap;
     width:80%
+}
+
+.mytrips {
+    color: black;
+    font-size: 25px;
+    font-family: 'Mr Eaves San OT';
+    font-weight: 700;
+    word-wrap: break-word;
+    font-size: 34px;
 }

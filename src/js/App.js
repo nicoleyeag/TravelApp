@@ -11,6 +11,7 @@ import Mid from '/static/jsx/midProfile.js'
 import TripList from '/static/jsx/myTrips.js'
 import MyTripInfo from '/static/jsx/tripInfo.js';
 import Banner from '/static/jsx/banner.js'
+import Wave from '/static/jsx/wave.js'
 // import RedirectButton from 'static/jsx/login.js';
 
 
@@ -37,6 +38,7 @@ ReactDOM.render(<Topnav />, document.getElementById('topnav'));
 
 if (currentPage === '/') {
     ReactDOM.render(<Banner />, document.getElementById('banner'));
+    ReactDOM.render(<Wave />, document.getElementById('wave'));
 }
 
 

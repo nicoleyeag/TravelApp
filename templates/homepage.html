@@ -4,26 +4,19 @@
 {% block head %}
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    
+{% endblock %}  
   
-{% endblock %}
-      <!-- end custom navbar -->
-
-      <!-- <div id="banner"></div> -->
-
-      {% block body %}
-
-      <div id="banner"></div>
-
-
-        
-
-      
-      {% endblock %}
+{% block outofmainbody %}
+  <!-- Your content outside of main-body goes here -->
+  <!-- Banner Section -->
+  <div id="banner">
+    <!-- Your banner content goes here -->
+  </div>
+  <div id="wave"></div>
+  {% endblock %}
 
 
-        </script>
-        
-    </body>
+  {% block body %}
 
-</html>
+
+  {% endblock %}
