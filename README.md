@@ -76,27 +76,35 @@ Modify trip information such as title, description, dates, and budget. Enjoy the
 When running the file for the first time, follow these steps:
 
 Clone repository:
+
 ``$ git clone https://github.com/nicoleyeag/TravelApp.git``
 
 Create virtual environment:
+
 ``$ virtualenv env``
 
 Activate the virtual environment:
+
 ``$ source env/bin/activate``
 
 Install the requirments:
+
 ``$ pip3 install -r requirements.txt``
 
 Get your own TripAdvisor API key and add it to secrets.sh:
+
 ``TRIPADVISOR_KEY= 'yourkey'``
 
 Run secrets.sh:
+
 ``$ source secrets.sh``
 
 Create your db:
+
 ``$ createdb travels``
 
 Run the app:
+
 ``$ python3 server.py``
 
 ## The Future of OMW:
