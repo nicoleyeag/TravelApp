@@ -88,5 +88,5 @@ Create your db:
 Run the app:
 ``$ python3 server.py``
 
-## The Future of OMW:
+## The Future of OMW
 Future versions of On My Way may include additional features such as user collaboration on trip planning, real-time location tracking, and integration with external APIs for more comprehensive travel information.
