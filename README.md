@@ -31,7 +31,7 @@ On My Way is built on a Flask server with a PostgreSQL database. The front end i
 ## Features
 User Registration and Authentication:
 Secure account creation and login with Bcrypt-encrypted passwords.
-
+![alt text]("static/img/OMW-signin.png" "authentication")
 
 Trip Creation:
 Customize travel itineraries with details like title, description, dates, and budget.
