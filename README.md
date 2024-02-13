@@ -23,8 +23,6 @@
 - SQLAlchemy
 - Flask
 - Bcrypt
-- Secrets
-- TripAdvisor API
 - Jinja
 - AJAX
 - JSON
